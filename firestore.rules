@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isBioUser() {
+      return request.auth != null && (
+        request.auth.uid == 'AeauV2cDCaNA2KJgzU5mlDHZTsl1' ||
+        request.auth.uid == 'BUz7KYnhvZcL6rxbkYpHmRI4EZF3' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.accessGroup == 'bio' ||
+        request.auth.token.email.matches('.*bio.*')
+      );
+    }
+
+    function isChemUser() {
+      return request.auth != null && (
+        request.auth.uid == 'GsFX4vYtLGPF5lZ2moR2H4CiOG23' ||
+        request.auth.uid == 'pUZOtinjBePL1uJFoasUJseXvXj1' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.accessGroup == 'chemical_micro' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.accessGroup == 'chemical' ||
+        (!request.auth.token.email.matches('.*bio.*') && request.auth.uid != 'AeauV2cDCaNA2KJgzU5mlDHZTsl1' && request.auth.uid != 'BUz7KYnhvZcL6rxbkYpHmRI4EZF3')
+      );
+    }
+
+    function isCategoryAllowedForUser(cat) {
+      return (isBioUser() && (cat == 'bio' || cat == 'nithish' || cat == 'micro_nutrients')) ||
+             (isChemUser() && (cat == 'chemical'));
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Products Collection: restrict read/write by category
+    match /products/{productId} {
+      allow read: if request.auth != null && (
+        resource == null || isCategoryAllowedForUser(resource.data.category)
+      );
+      allow create, update: if request.auth != null && isCategoryAllowedForUser(request.resource.data.category);
+      allow delete: if request.auth != null && isCategoryAllowedForUser(resource.data.category);
+    }
+
+    // Invoices & Purchases: restrict by accessGroup
+    match /invoices/{invoiceId} {
+      allow read: if request.auth != null && (
+        resource.data.accessGroup == null || 
+        (isBioUser() && resource.data.accessGroup == 'bio') ||
+        (isChemUser() && resource.data.accessGroup == 'chemical_micro')
+      );
+      allow create, update: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    match /purchases/{purchaseId} {
+      allow read: if request.auth != null && (
+        resource.data.accessGroup == null || 
+        (isBioUser() && resource.data.accessGroup == 'bio') ||
+        (isChemUser() && resource.data.accessGroup == 'chemical_micro')
+      );
+      allow create, update: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    // General Collections (customers, suppliers, company_settings, counters, etc.)
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

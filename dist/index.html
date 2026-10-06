@@ -1,0 +1,1419 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S M AGRI TECH | Business Management & ERP System</title>
+  <link rel="stylesheet" href="styles.css?v=27">
+  <link rel="icon" type="image/png" href="logo.png">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <section id="loginScreen" class="auth-view">
+    <div class="auth-card">
+      <div class="auth-header">
+        <img src="logo.png" alt="S M AGRI TECH Logo" class="auth-logo" onerror="this.style.display='none'">
+        <h1 id="authBrandHeader">S M AGRI TECH</h1>
+        <p class="auth-subtitle" id="authBrandSubtitle">AGRICULTURE CHEMICALS & FERTILIZERS · ERP DESK</p>
+      </div>
+      <form id="loginForm" class="auth-form">
+        <label>Email Address
+          <input id="loginEmail" type="email" value="" placeholder="user@example.com" required autocomplete="username">
+        </label>
+        <label>Password
+          <input id="loginPassword" type="password" value="" placeholder="••••••••" required autocomplete="current-password">
+        </label>
+        <button type="submit" id="loginSubmitBtn" class="primary auth-btn">Sign in to Billing & ERP Desk</button>
+        <div id="authError" class="auth-error" hidden></div>
+      </form>
+      <div class="auth-footer"><small>Protected by Firebase Authentication & Cloud Firestore</small></div>
+    </div>
+  </section>
+
+  <!-- MAIN APP WORKSPACE -->
+  <div id="appWorkspace" hidden>
+    <aside>
+      <img src="logo.png" alt="S M AGRI TECH Logo" onerror="this.style.display='none'">
+      <div class="brand" id="brandTitle">S M <span>AGRI TECH</span></div>
+      
+      <nav id="mainNav">
+        <button class="active" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+          <span>Dashboard</span>
+        </button>
+        
+        <div class="nav-section-title">SALES</div>
+        <button data-page="billing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          <span>New GST Invoice</span>
+        </button>
+        <button data-page="history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Invoice History</span>
+        </button>
+        <button data-page="salesReturn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg>
+          <span>Sales Return</span>
+        </button>
+        
+        <div class="nav-section-title">QUOTATIONS</div>
+        <button data-page="quotations">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+          <span>Quotation List</span>
+        </button>
+        
+        <div class="nav-section-title">PURCHASE</div>
+        <button data-page="purchases">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+          <span>New Purchase</span>
+        </button>
+        <button data-page="purchaseHistory">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <span>Purchase History</span>
+        </button>
+        <button data-page="purchaseReturn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 14 20 9 15 4"></polyline><path d="M4 20v-7a4 4 0 0 1 4-4h12"></path></svg>
+          <span>Purchase Return</span>
+        </button>
+        
+        <div class="nav-section-title">INVENTORY</div>
+        <button data-page="products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+          <span>Products</span>
+        </button>
+        <button data-page="inventory">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Stock Status</span>
+        </button>
+        
+        <div class="nav-section-title">PARTIES</div>
+        <button data-page="customers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Customers</span>
+        </button>
+        <button data-page="suppliers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Suppliers</span>
+        </button>
+        
+        <div class="nav-section-title">ACCOUNTS</div>
+        <button data-page="payments">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+          <span>Payments</span>
+        </button>
+        <button data-page="expenses">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>Expenses</span>
+        </button>
+        
+        <div class="nav-section-title">REPORTS</div>
+        <button data-page="reports">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Reports & GST</span>
+        </button>
+        
+        <div class="nav-section-title">SETTINGS</div>
+        <button id="settingsBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Business Settings</span>
+        </button>
+      </nav>
+      
+      <div class="aside-foot" id="asideFootText">S M AGRI TECH<br><small>Agriculture Chemicals & Fertilizers · Thalavadi</small></div>
+    </aside>
+
+    <main>
+      <header>
+        <div>
+          <span class="eyebrow" id="headerEyebrow">S M AGRI TECH</span>
+          <h1 id="pageTitle"><span id="dashboardMainTitle">Dashboard</span></h1>
+        </div>
+        <div class="header-actions">
+          <button id="stockNotificationBtn" class="notification-bell-btn" title="Low Stock & Inventory Alerts">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span id="lowStockBadge" class="notification-badge" hidden>0</span>
+          </button>
+          <span id="envBadge" class="badge" style="display:none;"></span>
+          <span id="connection" class="badge">Connected</span>
+          <button id="logoutBtn" class="text-button">Sign out</button>
+        </div>
+      </header>
+
+      <div class="notice" id="noticeText">Custom Cloud Billing & ERP · Powered by Firebase Cloud Firestore.</div>
+
+      <!-- DASHBOARD VIEW -->
+      <section id="dashboardView">
+        <div class="kpi-grid">
+          <div class="kpi-card" style="border-left:4px solid #10b981;"><span>GST Sales</span><strong id="dashGstSales">₹0.00</strong></div>
+          <div class="kpi-card" style="border-left:4px solid #3b82f6;"><span>Non-GST Sales</span><strong id="dashNonGstSales">₹0.00</strong></div>
+          <div class="kpi-card" style="border-left:4px solid #24527A;"><span>Total Sales</span><strong id="dashTotalSales">₹0.00</strong></div>
+          <div class="kpi-card"><span>Today's Sales</span><strong id="dashTodaySales">₹0.00</strong></div>
+          <div class="kpi-card"><span>Today's Purchase</span><strong id="dashTodayPurchase">₹0.00</strong></div>
+          <div class="kpi-card"><span>Total Receivables</span><strong id="dashReceivables">₹0.00</strong></div>
+          <div class="kpi-card"><span>Total Payables</span><strong id="dashPayables">₹0.00</strong></div>
+          <div class="kpi-card"><span>Stock Valuation</span><strong id="dashStockValuation">₹0.00</strong></div>
+          <div class="kpi-card alert"><span>Low Stock Alerts</span><strong id="dashLowStockAlerts">0</strong></div>
+          <div class="kpi-card alert" style="border-left:4px solid #ef4444;"><span>Expiry Alerts (&le;60d)</span><strong id="dashExpiryAlerts">0</strong></div>
+          <div class="kpi-card alert" style="border-left:4px solid #dc2626;"><span>Overdue Payment Alerts</span><strong id="dashOverdueAlerts">0</strong></div>
+        </div>
+
+        <div class="grid2">
+          <div class="panel">
+            <div class="panel-head"><h2>Daily Sales Trend (Last 7 Days)</h2></div>
+            <canvas id="salesTrendChart" height="150"></canvas>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Top Selling Products</h2></div>
+            <canvas id="topProductsChart" height="150"></canvas>
+          </div>
+        </div>
+
+        <!-- REAL-TIME OVERDUE PAYMENT ALERTS DASHBOARD WIDGET -->
+        <div class="panel" style="margin-top:20px; border:1.5px solid #fca5a5; background:#fff5f5; border-radius:12px;">
+          <div class="panel-head" style="margin-bottom:12px; border-bottom:1px solid #fecdd3; padding-bottom:8px;">
+            <h2 style="color:#b91c1c; display:flex; align-items:center; gap:8px;">
+              <span>🚨 Overdue Payment Alerts (&gt;30d Sales / &gt;75d Purchase)</span>
+              <span id="overdueAlertCountBadge" class="badge danger" style="font-size:12px; padding:3px 8px;">0 Notifications</span>
+            </h2>
+            <small class="muted">Real-time alerts for advance invoices (&gt;30 days) and advance purchases (&gt;75 days)</small>
+          </div>
+          <div id="dashOverdueWidgetRows" class="overdue-widget-list" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:12px;">
+            <div class="muted" style="padding:10px; font-size:13.5px;">Loading real-time overdue alerts...</div>
+          </div>
+        </div>
+
+        <!-- REAL-TIME EXPIRY ALERTS DASHBOARD WIDGET -->
+        <div class="panel" style="margin-top:20px; border:1.5px solid #fed7aa; background:#fff7ed; border-radius:12px;">
+          <div class="panel-head" style="margin-bottom:12px; border-bottom:1px solid #ffedd5; padding-bottom:8px;">
+            <h2 style="color:#c2410c; display:flex; align-items:center; gap:8px;">
+              <span>🔔 Expiry Alerts (&le;60 Days & Expired)</span>
+              <span id="expiryAlertCountBadge" class="badge danger" style="font-size:12px; padding:3px 8px;">0 Products</span>
+            </h2>
+            <small class="muted">Real-time alert levels based on current date evaluation</small>
+          </div>
+          <div id="dashExpiryWidgetRows" class="expiry-widget-list" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+            <div class="muted" style="padding:10px; font-size:13.5px;">Loading real-time expiry alerts...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BILLING / INVOICE VIEW -->
+      <section id="billing" hidden>
+        <div class="workspace">
+          <div class="editor">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>New Invoice / Quotation Desk</h2>
+                <button id="newBtn" class="text-button">Reset Draft</button>
+              </div>
+              <div class="grid3">
+                <label>Document Type
+                  <select id="type">
+                    <option value="invoice">Invoice / Bill</option>
+                    <option value="quotation">Customer Quotation</option>
+                  </select>
+                </label>
+                <label id="invoiceTypeWrap"><span id="invoiceTypeLabelText">Invoice Type</span>
+                  <select id="invoiceType">
+                    <option value="GST">GST Invoice</option>
+                    <option value="NON_GST">Non-GST Bill</option>
+                  </select>
+                </label>
+                <label>Document Date<input type="date" id="date" required></label>
+                <label id="validLabel" hidden>Valid Until<input type="date" id="validUntil"></label>
+              </div>
+
+              <h3>Customer Information</h3>
+              <div class="grid2" style="position:relative;">
+                <div class="search-picker-wrap" style="position:relative;">
+                  <label>Customer Name
+                    <input id="customer" placeholder="Type name, phone or GSTIN..." maxlength="100" autocomplete="off">
+                  </label>
+                  <div id="customerSearchResults" class="search-results-dropdown" hidden></div>
+                </div>
+                <div>
+                  <label>Phone<input id="phone" type="tel" maxlength="20" placeholder="10-digit mobile number"></label>
+                </div>
+
+                <div id="customerLookupStatus" class="customer-status-badge full" style="display:none; align-items:center; justify-content:space-between; background:rgba(46, 125, 50, 0.08); border:1px solid rgba(46, 125, 50, 0.3); padding:10px 14px; border-radius:8px; margin-bottom:10px;">
+                  <div id="customerLookupText" style="font-size:0.92em; color:#1b4332;"></div>
+                  <div id="customerLookupActions"></div>
+                </div>
+
+                <label id="customerGstinWrap">Customer GSTIN<input id="customerGstin" maxlength="15" placeholder="Required for GST Invoice"></label>
+                <label>Place of Supply (State Code)<input id="state" value="33" maxlength="2" placeholder="e.g. 33 — Tamil Nadu"></label>
+                <label class="full">Billing / Delivery Address<input id="address" maxlength="300" placeholder="Street, city and postal code"></label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h2>Items (<span id="itemCount">0</span>)</h2>
+                <button id="quickAddProductBtn" class="text-button">＋ Add New Product</button>
+              </div>
+
+              <!-- UNIFIED SINGLE ADD PRODUCT SECTION -->
+              <div class="unified-add-product-card">
+                <div class="unified-card-header">
+                  <div class="unified-card-title">
+                    <span>🏷️ Add Product</span>
+                    <small class="keyboard-hint">[F2 to Focus | Enter to Scan / Select]</small>
+                  </div>
+                  <button type="button" id="startCameraScanBtn" class="camera-scan-btn secondary">
+                    📷 Scan with Camera
+                  </button>
+                </div>
+
+                <div class="unified-input-row">
+                  <div class="search-input-wrap">
+                    <label for="productSearch" class="input-label">Barcode / Product Search</label>
+                    <div class="input-icon-group">
+                      <span class="search-icon">🔍</span>
+                      <input id="productSearch" type="text" placeholder="Scan barcode or search product name, HSN..." autocomplete="off">
+                      <span id="searchSpinner" class="search-spinner" style="display:none;">⏳</span>
+                    </div>
+                    <div id="productSearchResults" class="search-results-dropdown" hidden></div>
+                  </div>
+
+                  <div class="qty-input-wrap">
+                    <label for="productQty" class="input-label">Quantity</label>
+                    <input id="productQty" type="number" step="0.001" value="1" min="0.001" placeholder="Qty">
+                  </div>
+
+                  <div class="add-btn-wrap">
+                    <button type="button" id="unifiedAddBtn" class="primary">＋ Add to Cart</button>
+                  </div>
+                </div>
+
+                <!-- Dynamic Product Status / Selected Badge / Unknown Barcode Alert Area -->
+                <div id="productStatusArea" class="product-status-area" style="display:none;"></div>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr id="itemsTableHeader">
+                      <th>Product / HSN</th>
+                      <th>Qty / Unit</th>
+                      <th>Rate ₹</th>
+                      <th class="gst-col">GST %</th>
+                      <th style="min-width:65px;">Disc %</th>
+                      <th style="min-width:75px;">Disc ₹</th>
+                      <th>Total ₹</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="items"></tbody>
+                </table>
+              </div>
+
+              <div id="empty" class="empty">Start your bill by choosing a product.<small>Select from catalogue or search above.</small></div>
+              <label class="notes">Notes / Terms
+                <textarea id="notes" rows="2" maxlength="500" placeholder="Thank you for your business."></textarea>
+              </label>
+            </div>
+          </div>
+
+          <!-- SUMMARY PANEL -->
+          <div class="summary panel">
+            <span class="eyebrow">DOCUMENT SUMMARY</span>
+            <h2 id="summaryTitle">GST Invoice</h2>
+            <div class="summary-row"><span>Subtotal</span><b id="subtotal">₹0.00</b></div>
+            <div class="summary-row" style="align-items:center; justify-content:space-between; gap:6px;">
+              <span style="font-weight:700;">Discount</span>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <div style="display:inline-flex; align-items:center; background:#ffffff; border:1.5px solid #cbd5e1; border-radius:6px; overflow:hidden;" title="Discount Percentage (%)">
+                  <input type="number" id="overallDiscountPercent" step="0.01" min="0" max="100" value="0" placeholder="0.00" style="width:58px; text-align:right; padding:4px 5px; font-weight:700; border:none; font-size:12.5px; color:#15803d; outline:none; background:transparent;">
+                  <span style="padding:0 5px; font-size:11px; font-weight:800; color:#64748b; background:#f1f5f9; user-select:none;">%</span>
+                </div>
+                <div style="display:inline-flex; align-items:center; background:#ffffff; border:1.5px solid #86efac; border-radius:6px; overflow:hidden;" title="Discount Amount (₹)">
+                  <span style="padding:0 5px; font-size:11px; font-weight:800; color:#15803d; background:#dcfce7; user-select:none;">₹</span>
+                  <input type="number" id="overallDiscountAmount" step="0.01" min="0" value="0" placeholder="0.00" style="width:72px; text-align:right; padding:4px 5px; font-weight:700; border:none; font-size:12.5px; color:#14532d; outline:none; background:transparent;">
+                </div>
+                <select id="overallDiscountType" style="display:none;">
+                  <option value="amount" selected>₹</option>
+                  <option value="percent">%</option>
+                </select>
+                <input type="hidden" id="overallDiscountInput" value="0">
+                <b id="discountCalc" style="display:none;">₹0.00</b>
+                <b id="discount" style="display:none;">₹0.00</b>
+              </div>
+            </div>
+            <div class="summary-row gst-row"><span>Taxable Value</span><b id="taxable">₹0.00</b></div>
+            <div id="taxRows" class="gst-row"></div>
+            <div class="total">
+              <span>Grand Total</span>
+              <strong id="grand">₹0.00</strong>
+            </div>
+            <label>Payment Method
+              <select id="payment">
+                <option value="Cash">Cash</option>
+                <option value="UPI">UPI</option>
+                <option value="Card">Card</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Credit / Unpaid">Credit / Unpaid</option>
+              </select>
+            </label>
+            <label style="margin-top:10px;">Payment Status
+              <select id="payableStatus">
+                <option value="full_payment">FULL PAYMENT</option>
+                <option value="advance">ADVANCE</option>
+              </select>
+            </label>
+            <label id="advanceAmountWrap" style="margin-top:10px;" hidden>Advance Amount Received (₹)
+              <input type="number" id="advanceAmount" step="0.01" min="0" placeholder="0.00" style="font-weight:700; color:#15803d; border-color:#86efac;">
+            </label>
+            <p class="muted" id="taxMode">CGST + SGST · Intra-state (Tamil Nadu)</p>
+            <button id="saveBtn" class="primary wide">Save & Record Invoice</button>
+            <button id="previewBtn" class="wide">Preview & Print</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- INVOICE HISTORY VIEW -->
+      <section id="history" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Saved Invoices & Bills</h2>
+            <div style="display:flex;gap:12px;align-items:center;">
+              <label style="margin:0;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;">Filter:
+                <select id="historyFilterSelect" style="padding:6px 10px;border-radius:6px;border:1px solid #ccc;">
+                  <option value="ALL">All Invoices</option>
+                  <option value="GST">GST Invoices</option>
+                  <option value="NON_GST">Non-GST Bills</option>
+                </select>
+              </label>
+              <input id="searchInvoice" placeholder="Search invoice number or customer..." aria-label="Search invoices">
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Customer Name</th>
+                  <th>Grand Total</th>
+                  <th>Payment Mode</th>
+                  <th>Payment Status</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="historyRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" id="historyPagination">
+            <button id="historyPrevBtn" disabled>Previous</button>
+            <span id="historyPageLabel">Page 1</span>
+            <button id="historyNextBtn">Next</button>
+          </div>
+          <p id="historyEmpty" class="empty">No saved invoices found in Cloud Firestore.</p>
+        </div>
+      </section>
+
+      <!-- QUOTATIONS VIEW -->
+      <section id="quotationsView" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Customer Quotations & Estimates</h2>
+            <button id="newQuotationBtn" class="primary">＋ Create Quotation</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quotation #</th>
+                  <th>Date</th>
+                  <th>Valid Until</th>
+                  <th>Customer Name</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="quotationRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" id="quotationsPagination">
+            <button id="quotationsPrevBtn" disabled>Previous</button>
+            <span id="quotationsPageLabel">Page 1</span>
+            <button id="quotationsNextBtn">Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PURCHASES ENTRY VIEW -->
+      <section id="purchasesView" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Record Purchase Invoice (Stock Addition)</h2>
+          </div>
+          <form id="purchaseForm">
+            <div class="grid2" style="margin-bottom:12px;">
+              <label>Supplier
+                <select id="purSupplierSelect" required><option value="">Select Supplier...</option></select>
+              </label>
+              <label>Purchase Invoice Date<input type="date" id="purDate" required></label>
+              <label>Supplier Invoice #<input id="purSupplierInvNo" placeholder="e.g. INV-9982"></label>
+              <label>Payment Status
+                <select id="purPayableStatus">
+                  <option value="full_payment">FULL PAYMENT</option>
+                  <option value="advance">ADVANCE</option>
+                </select>
+              </label>
+              <label id="purAdvanceAmountWrap" hidden>Advance Amount Paid (₹)
+                <input type="number" id="purAdvanceAmount" step="0.01" min="0" placeholder="0.00" style="font-weight:700; color:#15803d; border-color:#86efac;">
+              </label>
+            </div>
+            <h3 style="margin-top:20px;">Purchase Line Items</h3>
+            <div class="picker">
+              <label style="flex:2;">Product
+                <input type="text" id="purProductSearch" class="autocomplete-input" placeholder="Type product name, barcode, or code..." autocomplete="off">
+                <select id="purProductSelect" style="display:none;"><option value="">Choose product...</option></select>
+              </label>
+              <label>Qty<input id="purQty" type="number" step="0.001" value="10"></label>
+              <label>Purchase Rate (₹)<input id="purRate" type="number" step="0.01" placeholder="0.00"></label>
+              <label>GST %<input id="purGst" type="number" step="0.01" value="5"></label>
+              <button type="button" id="addPurItemBtn" class="primary">Add</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Rate ₹</th>
+                    <th>GST %</th>
+                    <th>Taxable ₹</th>
+                    <th>Total ₹</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="purItemsTable"></tbody>
+              </table>
+            </div>
+            <div class="grid3" style="margin-top:20px;">
+              <label>Freight / Delivery Charges (₹)<input id="purFreight" type="number" step="0.01" value="0"></label>
+              <label>Other Charges (₹)<input id="purOtherCharges" type="number" step="0.01" value="0"></label>
+            </div>
+            <button class="primary wide" style="margin-top:20px;">Save Purchase & Increase Stock</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- PURCHASE HISTORY VIEW -->
+      <section id="purchaseHistoryView" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Purchase Records History</h2>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Purchase #</th>
+                  <th>Date</th>
+                  <th>Supplier</th>
+                  <th>Supplier Inv #</th>
+                  <th>Grand Total</th>
+                  <th>Payment Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="purchaseHistoryRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" id="purchaseHistoryPagination">
+            <button id="purchaseHistoryPrevBtn" disabled>Previous</button>
+            <span id="purchaseHistoryPageLabel">Page 1</span>
+            <button id="purchaseHistoryNextBtn">Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SALES RETURN VIEW -->
+      <section id="salesReturnView" hidden>
+        <div class="panel">
+          <div class="panel-head"><h2>Sales Return (Credit Note)</h2></div>
+          <form id="salesReturnForm">
+            <div class="grid2">
+              <label>Select Customer<select id="srCustomerSelect" required><option value="">Choose customer...</option></select></label>
+              <label>Original Invoice #<input id="srInvoiceNo" placeholder="e.g. AST-2026-0001"></label>
+              <label>Product Returned
+                <input type="text" id="srProductSearch" class="autocomplete-input" placeholder="Type product name or code..." autocomplete="off">
+                <select id="srProductSelect" style="display:none;" required><option value="">Choose product...</option></select>
+              </label>
+              <label>Returned Quantity<input id="srQty" type="number" step="0.001" required value="1"></label>
+              <label>Rate (₹)<input id="srRate" type="number" step="0.01" required placeholder="0.00"></label>
+              <label>GST %<input id="srGst" type="number" step="0.01" value="5"></label>
+              <label class="full">Reason for Return<input id="srReason" placeholder="e.g. Customer returned sealed pack / Quality complaint"></label>
+            </div>
+            <button class="primary wide" style="margin-top:20px;">Process Sales Return (+Increase Stock)</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- PURCHASE RETURN VIEW -->
+      <section id="purchaseReturnView" hidden>
+        <div class="panel">
+          <div class="panel-head"><h2>Purchase Return (Debit Note)</h2></div>
+          <form id="purchaseReturnForm">
+            <div class="grid2">
+              <label>Select Supplier<select id="prSupplierSelect" required><option value="">Choose supplier...</option></select></label>
+              <label>Original Purchase #<input id="prPurchaseNo" placeholder="e.g. PUR-2026-0001"></label>
+              <label>Product Returned
+                <input type="text" id="prProductSearch" class="autocomplete-input" placeholder="Type product name or code..." autocomplete="off">
+                <select id="prProductSelect" style="display:none;" required><option value="">Choose product...</option></select>
+              </label>
+              <label>Returned Quantity<input id="prQty" type="number" step="0.001" required value="1"></label>
+              <label>Rate (₹)<input id="prRate" type="number" step="0.01" required placeholder="0.00"></label>
+              <label>GST %<input id="prGst" type="number" step="0.01" value="5"></label>
+              <label class="full">Reason for Return<input id="prReason" placeholder="e.g. Damaged during transport / Supplier recall"></label>
+            </div>
+            <button class="primary wide" style="margin-top:20px;">Process Purchase Return (-Decrease Stock)</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- PRODUCTS MASTER VIEW -->
+      <section id="productsView" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Product & Item Master</h2>
+            <button id="openAddProdBtn" class="primary">＋ Add Product</button>
+          </div>
+          <div class="inv-filters">
+            <input id="prodSearchInput" placeholder="Search product name, HSN, barcode...">
+            <select id="prodCatFilter">
+              <option value="">All Categories</option>
+              <option value="bio">Bio</option>
+              <option value="nithish">Nithish</option>
+              <option value="chemical">Chemical</option>
+              <option value="micro_nutrients">Micro Nutrients</option>
+            </select>
+            <select id="prodStatusFilter">
+              <option value="">All Stock Statuses</option>
+              <option value="instock">In Stock</option>
+              <option value="lowstock">Low Stock</option>
+              <option value="outofstock">Out of Stock</option>
+              <option value="expiring">⚠️ Expiring Soon (&le;60d)</option>
+              <option value="expired">❌ Expired</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Barcode</th>
+                  <th>Category</th>
+                  <th>HSN</th>
+                  <th>Unit</th>
+                  <th>Purchase Rate ₹</th>
+                  <th>Selling Rate ₹</th>
+                  <th>GST %</th>
+                  <th>Stock Qty</th>
+                  <th>Stock Status</th>
+                  <th>Expiry Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productsRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" id="productsPagination">
+            <button id="productsPrevBtn" disabled>Previous</button>
+            <span id="productsPageLabel">Page 1</span>
+            <button id="productsNextBtn">Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- INVENTORY / STOCK MAINTENANCE VIEW -->
+      <section id="inventory" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Inventory Stock Maintenance & Audit</h2>
+            <div class="inv-actions">
+              <button id="openStockAdjBtn" class="primary">🛠 Adjust Stock</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Unit</th>
+                  <th>Current Stock Qty</th>
+                  <th>Min Stock Alert Threshold</th>
+                  <th>Stock Valuation (Purchase Rate)</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="stockStatusRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CUSTOMERS VIEW -->
+      <section id="customersView" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Customer Master Directory</h2>
+            <button id="openAddCustomerBtn" class="primary">＋ Add Customer</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Customer Name</th>
+                  <th>Type</th>
+                  <th>Phone</th>
+                  <th>GSTIN</th>
+                  <th>City / State</th>
+                  <th>Outstanding Balance</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="customerRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" id="customersPagination">
+            <button id="customersPrevBtn" disabled>Previous</button>
+            <span id="customersPageLabel">Page 1</span>
+            <button id="customersNextBtn">Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUPPLIERS VIEW -->
+      <section id="suppliersView" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Supplier Directory</h2>
+            <button id="openAddSupplierBtn" class="primary">＋ Add Supplier</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Supplier Name</th>
+                  <th>Phone</th>
+                  <th>GSTIN</th>
+                  <th>City / State</th>
+                  <th>Outstanding Balance</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="supplierRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" id="suppliersPagination">
+            <button id="suppliersPrevBtn" disabled>Previous</button>
+            <span id="suppliersPageLabel">Page 1</span>
+            <button id="suppliersNextBtn">Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAYMENTS VIEW -->
+      <section id="paymentsView" hidden>
+        <div class="grid2">
+          <div class="panel">
+            <div class="panel-head"><h2>Receive Customer Payment</h2></div>
+            <form id="custPayForm">
+              <label>Select Customer<select id="payCustSelect" required><option value="">Choose customer...</option></select></label>
+              <label>Payment Date<input type="date" id="payCustDate" required></label>
+              <label>Amount Received (₹)<input type="number" id="payCustAmount" step="0.01" required placeholder="0.00"></label>
+              <label>Payment Mode
+                <select id="payCustMode">
+                  <option value="Cash">Cash</option>
+                  <option value="UPI">UPI</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                  <option value="Cheque">Cheque</option>
+                  <option value="Card">Card</option>
+                </select>
+              </label>
+              <label>Reference No / Txn ID<input id="payCustRef" placeholder="e.g. UPI/123984729"></label>
+              <button class="primary wide" style="margin-top:15px;">Record Payment Received</button>
+            </form>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Make Supplier Payment</h2></div>
+            <form id="suppPayForm">
+              <label>Select Supplier<select id="paySuppSelect" required><option value="">Choose supplier...</option></select></label>
+              <label>Payment Date<input type="date" id="paySuppDate" required></label>
+              <label>Amount Paid (₹)<input type="number" id="paySuppAmount" step="0.01" required placeholder="0.00"></label>
+              <label>Payment Mode
+                <select id="paySuppMode">
+                  <option value="Bank Transfer">Bank Transfer (NEFT/RTGS)</option>
+                  <option value="UPI">UPI</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Cheque">Cheque</option>
+                </select>
+              </label>
+              <label>Reference No / UTR<input id="paySuppRef" placeholder="e.g. UTR/99812739"></label>
+              <button class="primary wide" style="margin-top:15px;">Record Supplier Payment</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPENSES VIEW -->
+      <section id="expensesView" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Business Expenses Management</h2>
+            <button id="openAddExpenseBtn" class="primary">＋ Record Expense</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Expense Category</th>
+                  <th>Amount ₹</th>
+                  <th>Payment Mode</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="expenseRows"></tbody>
+            </table>
+          </div>
+          <div class="pagination-bar" id="expensesPagination">
+            <button id="expensesPrevBtn" disabled>Previous</button>
+            <span id="expensesPageLabel">Page 1</span>
+            <button id="expensesNextBtn">Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- REPORTS & GST VIEW -->
+      <section id="reportsView" hidden>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Financial Reports & Statutory GST Returns</h2>
+            <button id="exportExcelBtn" class="primary">📊 Export to Excel (.xlsx)</button>
+          </div>
+          <div class="grid3">
+            <label>From Date<input type="date" id="repFromDate"></label>
+            <label>To Date<input type="date" id="repToDate"></label>
+            <label>Report Type
+              <select id="repTypeSelect">
+                <option value="sales">Sales Report</option>
+                <option value="purchases">Purchase Report</option>
+                <option value="profit">Profit & Margin Statement</option>
+                <option value="fastMoving">Fast / Slow Moving Products</option>
+                <option value="gst">GST Tax Return Summary</option>
+              </select>
+            </label>
+          </div>
+          <button id="runReportBtn" class="primary" style="margin-top:15px;">Generate Report</button>
+
+          <div id="reportOutputArea" style="margin-top:25px;"></div>
+        </div>
+      </section>
+
+      <footer>
+        <span id="footerBrandSpan">S M AGRI TECH · Agriculture Chemicals & Fertilizers · Thalavadi</span>
+        <span>Version 1.0 Production Ready</span>
+      </footer>
+    </main>
+
+    <!-- MOBILE BOTTOM NAVIGATION BAR -->
+    <nav id="mobileBottomNav" class="mobile-bottom-nav">
+      <button class="mobile-nav-btn active" data-page="dashboard" title="Dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="mobile-nav-btn" data-page="billing" title="Billing Desk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        <span>Billing</span>
+      </button>
+      <button class="mobile-nav-btn" data-page="history" title="Invoices">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>Invoices</span>
+      </button>
+      <button class="mobile-nav-btn" data-page="products" title="Products">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+        <span>Products</span>
+      </button>
+      <button class="mobile-nav-btn" id="mobileMoreBtn" title="More Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+        <span>More</span>
+      </button>
+    </nav>
+
+    <!-- MOBILE MORE DRAWER & BACKDROP -->
+    <div id="mobileDrawerBackdrop" class="mobile-drawer-backdrop"></div>
+    <div id="mobileMoreDrawer" class="mobile-more-drawer">
+      <div class="drawer-handle-bar"></div>
+      <div class="drawer-header">
+        <h2>ERP Sections & Menu</h2>
+        <button type="button" id="closeMobileDrawerBtn" class="drawer-close-btn">✕</button>
+      </div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">SALES & QUOTATIONS</div>
+        <div class="drawer-grid">
+          <button data-page="salesReturn" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg>
+            <span>Sales Return</span>
+          </button>
+          <button data-page="quotations" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+            <span>Quotation List</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">PURCHASES</div>
+        <div class="drawer-grid">
+          <button data-page="purchases" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            <span>New Purchase</span>
+          </button>
+          <button data-page="purchaseHistory" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <span>Purchase Register</span>
+          </button>
+          <button data-page="purchaseReturn" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 14 20 9 15 4"></polyline><path d="M4 20v-7a4 4 0 0 1 4-4h12"></path></svg>
+            <span>Purchase Return</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">INVENTORY & PARTIES</div>
+        <div class="drawer-grid">
+          <button data-page="inventory" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>Stock Maintenance</span>
+          </button>
+          <button data-page="customers" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+            <span>Customer Directory</span>
+          </button>
+          <button data-page="suppliers" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>Supplier Directory</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">ACCOUNTS & REPORTS</div>
+        <div class="drawer-grid">
+          <button data-page="payments" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+            <span>Payments</span>
+          </button>
+          <button data-page="expenses" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <span>Expenses</span>
+          </button>
+          <button data-page="reports" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>Reports & GST</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <div class="drawer-section-title">SYSTEM & PROFILE</div>
+        <div class="drawer-grid">
+          <button id="mobileSettingsBtn" class="drawer-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>Business Settings</span>
+          </button>
+          <button id="mobileLogoutBtn" class="drawer-item danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- REALTIME STOCK, EXPIRY & OVERDUE PAYMENT ALERTS DIALOG -->
+  <dialog id="lowStockDialog" style="width:90%;max-width:880px;">
+    <div class="panel-head">
+      <h2 style="color:#b91c1c; display:flex; align-items:center; gap:8px;">
+        <span>🔔 Real-Time Stock, Expiry & Overdue Payment Alerts</span>
+      </h2>
+      <button type="button" data-close="lowStockDialog">✕</button>
+    </div>
+
+    <!-- OVERDUE PAYMENT ALERTS SECTION -->
+    <div style="margin-bottom:20px;">
+      <h3 style="color:#b91c1c; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+        <span>🚨 Overdue Payment Alerts (&gt;30 Days Sales / &gt;75 Days Purchase)</span>
+      </h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Document #</th>
+              <th>Date</th>
+              <th>Customer / Supplier</th>
+              <th>Total Amount</th>
+              <th>Balance Due</th>
+              <th>Payment Status</th>
+            </tr>
+          </thead>
+          <tbody id="overdueAlertModalRows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EXPIRY ALERTS SECTION -->
+    <div style="margin-bottom:20px;">
+      <h3 style="color:#c2410c; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+        <span>⚠️ Product Expiry Alerts (&le;60 Days & Expired)</span>
+      </h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Barcode</th>
+              <th>Expiry Date</th>
+              <th>Days Remaining</th>
+              <th>Alert Level</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="expiryAlertModalRows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LOW STOCK ALERTS SECTION -->
+    <div>
+      <h3 style="color:#b91c1c; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+        <span>📦 Low Stock & Out-of-Stock Thresholds</span>
+      </h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Barcode</th>
+              <th>Current Stock</th>
+              <th>Min Stock</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="lowStockAlertRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- PRODUCT MODAL -->
+  <dialog id="productDialog">
+    <form id="productForm">
+      <div class="panel-head">
+        <h2 id="productModalTitle">Add Product</h2>
+        <button type="button" data-close="productDialog">✕</button>
+      </div>
+      <input type="hidden" id="prodId">
+      <div class="grid2">
+        <label class="full">Product Name<input id="prodName" required maxlength="100" placeholder="e.g. Green Cardamom 8mm"></label>
+        <label>Barcode / EAN <small style="color:#666;">(Unique Barcode)</small><input id="prodBarcode" maxlength="50" placeholder="e.g. 8901234567890"></label>
+        <label>Category
+          <select id="prodCategory" required>
+            <option value="bio">Bio</option>
+            <option value="nithish">Nithish</option>
+            <option value="chemical">Chemical</option>
+            <option value="micro_nutrients">Micro Nutrients</option>
+          </select>
+        </label>
+        <label>HSN Code<input id="prodHsn" maxlength="8" placeholder="e.g. 84713010"></label>
+        <label>Unit of Measure
+          <select id="prodUnit">
+            <option value="PCS">PCS (Piece)</option>
+            <option value="KG">KG (Kilogram)</option>
+            <option value="GRAM">GRAM</option>
+            <option value="LTR">LTR (Litre)</option>
+            <option value="ML">ML (Millilitre)</option>
+            <option value="MTR">MTR (Metre)</option>
+            <option value="BOX">BOX</option>
+            <option value="PACKET">PACKET</option>
+            <option value="BOTTLE">BOTTLE</option>
+            <option value="DOZEN">DOZEN</option>
+            <option value="SET">SET</option>
+          </select>
+        </label>
+        <label>Purchase Rate (₹)<input id="prodPurchaseRate" type="number" step="0.01" min="0" required placeholder="0.00"></label>
+        <label>Selling Rate (₹)<input id="prodSellingRate" type="number" step="0.01" min="0" required placeholder="0.00"></label>
+        <label>GST Rate (%)
+          <select id="prodGstRate">
+            <option value="0">0%</option>
+            <option value="5" selected>5%</option>
+            <option value="12">12%</option>
+            <option value="18">18%</option>
+            <option value="28">28%</option>
+          </select>
+        </label>
+        <label>Opening Stock Qty<input id="prodOpeningStock" type="number" step="0.001" value="50"></label>
+        <label>Minimum Stock Alert Threshold<input id="prodMinStock" type="number" step="0.001" value="10"></label>
+        <label class="full">Product Expiry Date <small style="color:#666;">(Select date for 60-day real-time alerts)</small>
+          <input id="prodExpiryDate" type="date">
+        </label>
+      </div>
+      <button class="primary wide" style="margin-top:20px;">Save Product</button>
+    </form>
+  </dialog>
+
+  <!-- CAMERA BARCODE SCANNER MODAL -->
+  <dialog id="cameraScanDialog">
+    <div class="panel-head">
+      <h2>📷 Camera Barcode Scanner</h2>
+      <button type="button" id="closeCameraScanBtn" data-close="cameraScanDialog">✕</button>
+    </div>
+    <div style="text-align:center; padding:15px 0;">
+      <video id="cameraScanVideo" style="width:100%; max-width:400px; height:240px; background:#000; border-radius:8px; object-fit:cover;" autoplay playsinline muted></video>
+      <div id="cameraScanStatus" style="margin-top:10px; font-weight:600; color:#2e7d32;">Point camera at product barcode...</div>
+    </div>
+  </dialog>
+
+  <!-- CUSTOMER MODAL -->
+  <dialog id="customerDialog">
+    <form id="customerForm">
+      <div class="panel-head">
+        <h2 id="custModalTitle">Add Customer</h2>
+        <button type="button" data-close="customerDialog">✕</button>
+      </div>
+      <input type="hidden" id="custId">
+      <div class="grid2">
+        <label>Customer Name *<input id="custName" required placeholder="e.g. ABC Traders"></label>
+        <label>Phone *<input id="custPhone" type="tel" required placeholder="10-digit mobile number"></label>
+        <label>Tax Type *
+          <select id="custTaxType">
+            <option value="GST">GST Customer</option>
+            <option value="NON_GST">Non-GST Customer</option>
+          </select>
+        </label>
+        <label>Customer Type
+          <select id="custType">
+            <option value="B2B">B2B</option>
+            <option value="B2C">B2C</option>
+            <option value="Wholesale">Wholesale</option>
+            <option value="Retail">Retail</option>
+          </select>
+        </label>
+        <label id="modalCustGstinWrap">Customer GSTIN *<input id="custGstin" maxlength="15" placeholder="e.g. 33ABCDE1234F1Z5"></label>
+        <label>State<input id="custState" value="Tamil Nadu" placeholder="e.g. Tamil Nadu"></label>
+        <label>State Code<input id="custStateCode" value="33" maxlength="2" placeholder="33"></label>
+        <label>Opening Balance (₹)<input id="custOpeningBalance" type="number" step="0.01" value="0"></label>
+        <label>Credit Limit (₹)<input id="custCreditLimit" type="number" step="0.01" value="0"></label>
+        <label>Payment Terms<input id="custPaymentTerms" placeholder="e.g. Net 15, Net 30, COD" value="Net 15"></label>
+        <label class="full">Billing Address<input id="custAddress" placeholder="Street, city and postal code"></label>
+        <label class="full">Delivery Address<input id="custDeliveryAddress" placeholder="Delivery address (defaults to billing address if blank)"></label>
+      </div>
+      <button class="primary wide" style="margin-top:20px;">Save Customer</button>
+    </form>
+  </dialog>
+
+  <!-- CANCEL INVOICE MODAL -->
+  <dialog id="cancelInvoiceDialog">
+    <form id="cancelInvoiceForm">
+      <div class="panel-head">
+        <h2>Cancel / Correct Invoice</h2>
+        <button type="button" data-close="cancelInvoiceDialog">✕</button>
+      </div>
+      <input type="hidden" id="cancelInvId">
+      <p style="font-weight:600;color:#d32f2f;" id="cancelInvNumText">Cancelling Invoice #</p>
+      <label class="full" style="margin-top:10px;">Mandatory Reason (Audit Requirement)
+        <textarea id="cancelReason" rows="3" required placeholder="e.g. Incorrect customer details / Recreating invoice"></textarea>
+      </label>
+      <button class="small-btn danger wide" style="margin-top:15px;padding:10px;">Confirm & Audit Log Cancellation</button>
+    </form>
+  </dialog>
+
+  <!-- SUPPLIER MODAL -->
+  <dialog id="supplierDialog">
+    <form id="supplierForm">
+      <div class="panel-head">
+        <h2 id="suppModalTitle">Add Supplier</h2>
+        <button type="button" data-close="supplierDialog">✕</button>
+      </div>
+      <input type="hidden" id="suppId">
+      <div class="grid2">
+        <label class="full">Supplier Name<input id="suppName" required placeholder="e.g. Kerala Spice Farms"></label>
+        <label>Phone Number<input id="suppPhone" type="tel" placeholder="Mobile number"></label>
+        <label>GSTIN<input id="suppGstin" maxlength="15" placeholder="e.g. 32ABCDE1234F1Z6"></label>
+        <label>State Code<input id="suppStateCode" value="32" maxlength="2" placeholder="32"></label>
+        <label class="full">Address<input id="suppAddress" placeholder="Supplier location & address"></label>
+        <label>Opening Payable (₹)<input id="suppOpening" type="number" step="0.01" value="0"></label>
+      </div>
+      <button class="primary wide" style="margin-top:20px;">Save Supplier</button>
+    </form>
+  </dialog>
+
+  <!-- STOCK ADJUSTMENT MODAL -->
+  <dialog id="restockDialog">
+    <form id="restockForm">
+      <div class="panel-head">
+        <h2>Stock Adjustment & Audit</h2>
+        <button type="button" data-close="restockDialog">✕</button>
+      </div>
+        <label class="full">Select Product
+          <input type="text" id="adjProductSearch" class="autocomplete-input" placeholder="Type product name or code..." autocomplete="off">
+          <select id="adjProdSelect" style="display:none;" required><option value="">Choose product...</option></select>
+        </label>
+      <div class="grid2" style="margin-top:15px;">
+        <label>Adjustment Action
+          <select id="adjAction">
+            <option value="INCREASE">🟢 Increase Stock (+)</option>
+            <option value="DECREASE">🔴 Decrease Stock (-)</option>
+          </select>
+        </label>
+        <label>Quantity<input id="adjQty" type="number" step="0.001" required value="10"></label>
+        <label class="full">Reason / Audit Note<input id="adjReason" required placeholder="e.g. Physical audit recount / Transport damage"></label>
+      </div>
+      <button class="primary wide" style="margin-top:20px;">Record Stock Movement</button>
+    </form>
+  </dialog>
+
+  <!-- EXPENSE MODAL -->
+  <dialog id="expenseDialog">
+    <form id="expenseForm">
+      <div class="panel-head">
+        <h2>Record Expense</h2>
+        <button type="button" data-close="expenseDialog">✕</button>
+      </div>
+      <div class="grid2">
+        <label>Expense Date<input type="date" id="expDate" required></label>
+        <label>Category
+          <select id="expCategory" required>
+            <option value="Transport & Delivery">Transport & Delivery</option>
+            <option value="Freight & Shipping">Freight & Shipping</option>
+            <option value="Loading & Unloading">Loading & Unloading</option>
+            <option value="Packaging Material">Packaging Material</option>
+            <option value="Shop Rent">Shop Rent</option>
+            <option value="Electricity & Utilities">Electricity & Utilities</option>
+            <option value="Staff Salary & Wages">Staff Salary & Wages</option>
+            <option value="Maintenance & Repairs">Maintenance & Repairs</option>
+            <option value="Miscellaneous & Office">Miscellaneous & Office</option>
+          </select>
+        </label>
+        <label>Amount (₹)<input id="expAmount" type="number" step="0.01" required placeholder="0.00"></label>
+        <label>Payment Mode
+          <select id="expMode">
+            <option value="Cash">Cash</option>
+            <option value="UPI">UPI</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+          </select>
+        </label>
+        <label class="full">Description / Notes<input id="expDesc" placeholder="e.g. Monthly shop rent paid to landlord"></label>
+      </div>
+      <button class="primary wide" style="margin-top:20px;">Save Expense</button>
+    </form>
+  </dialog>
+
+  <!-- SETTINGS MODAL -->
+  <dialog id="settingsDialog">
+    <form id="settingsForm">
+      <div class="panel-head">
+        <h2>Business & Bank Settings</h2>
+        <button type="button" data-close="settingsDialog">✕</button>
+      </div>
+      <h3>Company & Business Profile</h3>
+      <div class="grid2">
+        <label class="full">Business Name<input id="settName" required maxlength="100" placeholder="e.g. S M AGRI TECH"></label>
+        <label class="full">Business Tagline / Subtitle<input id="settSubtitle" maxlength="150" placeholder="e.g. Agriculture Chemicals & Fertilizers · Thalavadi"></label>
+        <label class="full">Company Logo Image URL<input id="settLogoUrl" maxlength="300" placeholder="logo.png"></label>
+        <label class="full">Business Address<input id="settAddress" maxlength="300" placeholder="Thalavadi, Erode District, Tamil Nadu"></label>
+        <label>GSTIN / Tax ID<input id="settGstin" maxlength="15" placeholder="e.g. 33AAAAA0000A1Z5"></label>
+        <label>Phone Number<input id="settPhone" maxlength="20" placeholder="e.g. +91 98765 43210"></label>
+        <label>Email Address<input id="settEmail" type="email" maxlength="100" placeholder="contact@smagritech.com"></label>
+        <label>State Code<input id="settStateCode" maxlength="2" placeholder="33"></label>
+        <label>Invoice Prefix<input id="settInvoicePrefix" maxlength="10" placeholder="INV"></label>
+        <label>Quotation Prefix<input id="settQuotationPrefix" maxlength="10" placeholder="QTN"></label>
+        <label class="full" style="display:flex; align-items:center; gap:8px; margin-top:10px; cursor:pointer;">
+          <input id="settAllowNegativeStock" type="checkbox" style="width:18px; height:18px;">
+          <span style="font-weight:600; font-size:14px; color:#1b4332;">Allow Negative Stock Billing</span>
+        </label>
+      </div>
+
+      <h3 style="margin-top:20px;">Bank Account Details (Printed on Invoices & Receipts)</h3>
+      <div class="grid2">
+        <label>Account Name<input id="settBankName" maxlength="100" placeholder="S M AGRI TECH"></label>
+        <label>Bank Name<input id="settBankInst" maxlength="100" placeholder="State Bank of India"></label>
+        <label>Account No<input id="settBankNo" maxlength="30" placeholder="123456789012"></label>
+        <label>IFSC Code<input id="settBankIfsc" maxlength="15" placeholder="SBIN0001234"></label>
+        <label class="full">Branch Address<input id="settBankBranch" maxlength="150" placeholder="e.g. Main Branch, Commercial District"></label>
+      </div>
+
+      <h3 style="margin-top:20px;">Invoice Terms & Conditions</h3>
+      <div class="grid2">
+        <label class="full">Terms & Conditions (Printed on Invoices)<textarea id="settTerms" rows="3" placeholder="Enter terms & conditions line by line..."></textarea></label>
+      </div>
+
+      <button class="primary wide" style="margin-top:20px;">Save Business Settings</button>
+    </form>
+  </dialog>
+
+  <!-- PRINT DIALOG -->
+  <dialog id="printDialog">
+    <div class="print-controls">
+      <h2>Document Print Preview</h2>
+      <select id="paper" aria-label="Paper size">
+        <option value="a4">A4 GST Tax Invoice</option>
+        <option value="80">80 mm Thermal Receipt</option>
+        <option value="58">58 mm Thermal Receipt</option>
+      </select>
+      <button id="printBtn" class="primary">Print / Save as PDF</button>
+      <button type="button" data-close="printDialog">Close</button>
+    </div>
+    <div id="receipt"></div>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- MOBILE BOTTOM NAVIGATION (Visible on screens <= 768px when logged in) -->
+  <nav id="mobileBottomNav" class="mobile-bottom-nav" hidden>
+    <button class="mobile-nav-btn active" data-page="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="mobile-nav-btn" data-page="billing">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+      <span>Billing</span>
+    </button>
+    <button class="mobile-nav-btn" data-page="history">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      <span>Invoices</span>
+    </button>
+    <button class="mobile-nav-btn" data-page="products">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+      <span>Products</span>
+    </button>
+    <button class="mobile-nav-btn" id="mobileMoreBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+  <!-- MOBILE "MORE" SLIDE-UP DRAWER SHEET -->
+  <div id="mobileDrawerBackdrop" class="mobile-drawer-backdrop"></div>
+  <div id="mobileMoreDrawer" class="mobile-more-drawer">
+    <div class="drawer-handle-bar"></div>
+    <div class="drawer-header">
+      <h2>All Operations</h2>
+      <button type="button" class="drawer-close-btn" id="closeMobileDrawerBtn">✕</button>
+    </div>
+    
+    <div class="drawer-section">
+      <div class="drawer-section-title">Sales & Billing</div>
+      <div class="drawer-grid">
+        <button class="drawer-item" data-page="billing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <span>New Invoice</span>
+        </button>
+        <button class="drawer-item" data-page="history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Invoice History</span>
+        </button>
+        <button class="drawer-item" data-page="salesReturn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path></svg>
+          <span>Sales Return</span>
+        </button>
+        <button class="drawer-item" data-page="quotations">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path></svg>
+          <span>Quotations</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">Purchases & Vendors</div>
+      <div class="drawer-grid">
+        <button class="drawer-item" data-page="purchases">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+          <span>New Purchase</span>
+        </button>
+        <button class="drawer-item" data-page="purchaseHistory">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+          <span>Purchase List</span>
+        </button>
+        <button class="drawer-item" data-page="purchaseReturn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 14 20 9 15 4"></polyline></svg>
+          <span>Purchase Return</span>
+        </button>
+        <button class="drawer-item" data-page="suppliers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Suppliers</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">Inventory & Parties</div>
+      <div class="drawer-grid">
+        <button class="drawer-item" data-page="products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg>
+          <span>Products Item</span>
+        </button>
+        <button class="drawer-item" data-page="inventory">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line></svg>
+          <span>Stock Status</span>
+        </button>
+        <button class="drawer-item" data-page="customers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          <span>Customers</span>
+        </button>
+        <button class="drawer-item" data-page="expenses">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>Expenses</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">Reports & System</div>
+      <div class="drawer-grid">
+        <button class="drawer-item" data-page="reports">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line></svg>
+          <span>GST Reports</span>
+        </button>
+        <button class="drawer-item" id="mobileSettingsBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Settings</span>
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-top:14px; text-align:center;">
+      <button class="drawer-item danger" id="mobileLogoutBtn" style="justify-content:center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        <span>Sign Out of Account</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- FIREBASE & APPLICATION MODULES -->
+  <script src="firebase-config.js?v=60"></script>
+  <script type="module" src="app.js?v=61"></script>
+</body>
+</html>
